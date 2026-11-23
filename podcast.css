@@ -1,0 +1,234 @@
+/* Podcast section — cinematic layout + mobile CTA spacing.
+   Several Tailwind spacing utilities (mt-6, mt-12, aspect-video, w-11)
+   are missing from the precompiled bundle, so these rules are explicit. */
+
+#podcast .zts-header { margin-bottom: 3.5rem; }
+
+#podcast .zts-title {
+  font-size: 2.75rem;
+  line-height: 1.05;
+  letter-spacing: -0.03em;
+  font-weight: 700;
+  color: #fff;
+  margin: 0 0 1.25rem;
+}
+@media (min-width: 640px) {
+  #podcast .zts-title { font-size: 3.75rem; }
+}
+@media (min-width: 1024px) {
+  #podcast .zts-title { font-size: 4.5rem; }
+}
+
+#podcast .zts-pitch-line {
+  max-width: 40rem;
+  margin: 0 auto 0.75rem;
+  font-size: 1.125rem;
+  line-height: 1.6;
+  color: #9ca3af;
+}
+@media (min-width: 640px) {
+  #podcast .zts-pitch-line { font-size: 1.25rem; }
+}
+
+#podcast .zts-former {
+  margin: 0;
+  font-size: 0.875rem;
+  color: #6b7280;
+}
+
+#podcast .zts-episodes {
+  display: flex;
+  flex-direction: column;
+  gap: 1.75rem;
+}
+
+#podcast .zts-episode {
+  background: #13131a;
+  border: 1px solid rgba(255, 255, 255, 0.05);
+  overflow: hidden;
+}
+#podcast .zts-episode--featured { border-radius: 1.5rem; }
+#podcast .zts-episode--more { border-radius: 1rem; }
+
+#podcast .zts-player {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  background: #0a0a0f;
+  overflow: hidden;
+}
+#podcast .zts-player-frame {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  border: 0;
+}
+#podcast .zts-play-btn {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  padding: 0;
+  border: 0;
+  cursor: pointer;
+  background: transparent;
+  display: block;
+}
+#podcast .zts-play-btn:focus-visible {
+  outline: 2px solid #8b5cf6;
+  outline-offset: 3px;
+}
+#podcast .zts-thumb {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  transform: scale(1.02);
+  transition: transform 700ms ease;
+}
+#podcast .zts-play-btn:hover .zts-thumb { transform: scale(1.06); }
+
+#podcast .zts-play-overlay {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: linear-gradient(to top, rgba(10, 10, 15, 0.65) 0%, rgba(10, 10, 15, 0.15) 45%, rgba(10, 10, 15, 0.2) 100%);
+}
+#podcast .zts-play-circle {
+  width: 4.25rem;
+  height: 4.25rem;
+  border-radius: 9999px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #fff;
+  background: linear-gradient(135deg, #7c3aed, #6d28d9);
+  box-shadow: 0 10px 28px rgba(124, 58, 237, 0.45);
+  transition: transform 200ms ease, box-shadow 200ms ease;
+}
+#podcast .zts-play-btn:hover .zts-play-circle {
+  transform: scale(1.08);
+  box-shadow: 0 12px 32px rgba(124, 58, 237, 0.55);
+}
+
+#podcast .zts-ep-meta { padding: 1.25rem 1.5rem 1.5rem; }
+@media (min-width: 640px) {
+  #podcast .zts-episode--featured .zts-ep-meta { padding: 1.5rem 2rem 1.75rem; }
+}
+#podcast .zts-ep-date {
+  margin: 0 0 0.5rem;
+  font-size: 0.75rem;
+  font-weight: 500;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: #c4b5fd;
+}
+#podcast .zts-ep-title {
+  margin: 0 0 0.85rem;
+  font-size: 1.125rem;
+  font-weight: 600;
+  line-height: 1.35;
+  color: #fff;
+}
+@media (min-width: 640px) {
+  #podcast .zts-episode--featured .zts-ep-title { font-size: 1.35rem; }
+}
+#podcast .zts-ep-watch {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 0.875rem;
+  font-weight: 500;
+  color: #a78bfa;
+  text-decoration: none;
+}
+#podcast .zts-ep-watch:hover { color: #c4b5fd; }
+
+/* CTA: breathing room Ocean asked for after the last episode card */
+#podcast .zts-cta {
+  margin-top: 0;
+  padding-top: 48px; /* breathing room above the button; padding avoids margin collapse */
+  padding-bottom: 48px;
+  text-align: center;
+}
+#podcast .zts-cta-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  box-sizing: border-box;
+  width: 100%;
+  min-height: 52px;
+  padding: 14px 28px;
+  font-size: 1rem;
+  font-weight: 600;
+  line-height: 1.2;
+  color: #fff;
+  text-decoration: none;
+  border-radius: 0.75rem;
+  background: linear-gradient(to right, #7c3aed, #8b5cf6);
+  box-shadow: 0 10px 24px rgba(124, 58, 237, 0.3);
+  transition: background 300ms ease, transform 150ms ease;
+}
+#podcast .zts-cta-btn:hover {
+  background: linear-gradient(to right, #8b5cf6, #a78bfa);
+}
+#podcast .zts-cta-btn:focus-visible {
+  outline: 2px solid #c4b5fd;
+  outline-offset: 3px;
+}
+@media (min-width: 640px) {
+  #podcast .zts-cta-btn {
+    width: auto;
+    min-width: 280px;
+    padding: 14px 36px;
+  }
+}
+
+#podcast .zts-follow {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 16px;
+  margin-top: 24px;
+}
+#podcast .zts-follow-btn {
+  width: 44px;
+  height: 44px;
+  border-radius: 0.5rem;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  color: #9ca3af;
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  text-decoration: none;
+  transition: color 200ms ease, border-color 200ms ease, background 200ms ease;
+}
+#podcast .zts-follow-btn:hover {
+  color: #fff;
+  border-color: rgba(139, 92, 246, 0.5);
+  background: rgba(255, 255, 255, 0.08);
+}
+#podcast .zts-follow-btn:focus-visible {
+  outline: 2px solid #8b5cf6;
+  outline-offset: 3px;
+}
+
+#podcast .zts-guest {
+  margin: 28px 0 0;
+  font-size: 0.9375rem;
+  line-height: 1.5;
+  color: #9ca3af;
+}
+#podcast .zts-guest a {
+  color: #a78bfa;
+  text-decoration: none;
+}
+#podcast .zts-guest a:hover { color: #c4b5fd; text-decoration: underline; }
+
+/* Extra space before the next (Contact) section */
+#podcast { padding-bottom: 8rem; }
