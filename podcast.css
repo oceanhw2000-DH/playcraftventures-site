@@ -39,6 +39,7 @@
 #podcast .zts-episodes {
   display: flex;
   flex-direction: column;
+  align-items: center;
   gap: 1.75rem;
 }
 
@@ -46,9 +47,26 @@
   background: #13131a;
   border: 1px solid rgba(255, 255, 255, 0.05);
   overflow: hidden;
+  width: 100%;
 }
-#podcast .zts-episode--featured { border-radius: 1.5rem; }
+#podcast .zts-episode--featured {
+  border-radius: 1.5rem;
+  max-width: 960px;
+  margin: 0 auto;
+}
 #podcast .zts-episode--more { border-radius: 1rem; }
+
+#podcast .zts-episodes-more {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1.75rem;
+  width: 100%;
+}
+@media (min-width: 900px) {
+  #podcast .zts-episodes-more {
+    grid-template-columns: 1fr 1fr;
+  }
+}
 
 #podcast .zts-player {
   position: relative;
