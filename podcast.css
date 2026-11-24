@@ -39,11 +39,36 @@
 }
 
 #podcast .zts-episode {
-  background: #13131a;
-  border: 1px solid rgba(255, 255, 255, 0.05);
-  overflow: hidden;
+  position: relative;
+  isolation: isolate;
   width: 100%;
+  overflow: hidden;
+  background: rgba(16, 16, 24, 0.58);
+  backdrop-filter: blur(18px) saturate(140%);
+  -webkit-backdrop-filter: blur(18px) saturate(140%);
+  border: none;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.35);
+  transition: filter 250ms ease, box-shadow 250ms ease;
 }
+#podcast .zts-episode::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  padding: 1px;
+  background: linear-gradient(135deg, rgba(139, 92, 246, 0.85), rgba(34, 211, 238, 0.65));
+  -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+  -webkit-mask-composite: xor;
+          mask-composite: exclude;
+  pointer-events: none;
+  opacity: 0.72;
+  transition: opacity 250ms ease;
+  z-index: 3;
+}
+#podcast .zts-episode:hover {
+  filter: drop-shadow(0 0 18px rgba(139, 92, 246, 0.45)) drop-shadow(0 0 28px rgba(34, 211, 238, 0.22));
+}
+#podcast .zts-episode:hover::before { opacity: 1; }
 #podcast .zts-episode--featured {
   border-radius: 1.5rem;
   max-width: 960px;
@@ -253,4 +278,165 @@ footer a[aria-label] {
   width: 44px;
   height: 44px;
   box-sizing: border-box;
+}
+
+/* Futuristic FX: glass already on cards; bg mesh/grid/particles; badge; scroll reveal.
+   Classes: zts-bg, zts-bg-mesh, zts-bg-grid, zts-bg-canvas, zts-bg-line,
+   zts-badge, zts-reveal, zts-bg-paused */
+
+#podcast .zts-bg {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  overflow: hidden;
+  pointer-events: none;
+}
+#podcast .zts-bg-mesh {
+  position: absolute;
+  inset: -18%;
+  background:
+    radial-gradient(ellipse 42% 32% at 18% 28%, rgba(124, 58, 237, 0.26), transparent 62%),
+    radial-gradient(ellipse 36% 36% at 82% 18%, rgba(34, 211, 238, 0.14), transparent 62%),
+    radial-gradient(ellipse 48% 40% at 58% 82%, rgba(139, 92, 246, 0.18), transparent 66%),
+    linear-gradient(180deg, #0a0a0f 0%, #0d0d14 48%, #0a0a0f 100%);
+  animation: zts-mesh 28s ease-in-out infinite alternate;
+  will-change: transform;
+}
+@keyframes zts-mesh {
+  from { transform: translate3d(-2%, -1%, 0) scale(1); }
+  to { transform: translate3d(2.5%, 2%, 0) scale(1.06); }
+}
+#podcast .zts-bg-grid {
+  position: absolute;
+  inset: 0;
+  background-image:
+    linear-gradient(rgba(165, 243, 252, 0.045) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(139, 92, 246, 0.055) 1px, transparent 1px);
+  background-size: 48px 48px;
+  -webkit-mask-image: radial-gradient(ellipse at center, #000 38%, transparent 82%);
+          mask-image: radial-gradient(ellipse at center, #000 38%, transparent 82%);
+  animation: zts-grid 42s linear infinite;
+  will-change: background-position;
+}
+@keyframes zts-grid {
+  from { background-position: 0 0, 0 0; }
+  to { background-position: 48px 48px, 48px 48px; }
+}
+#podcast .zts-bg-canvas {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  display: block;
+}
+#podcast .zts-bg-line {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 1px;
+  z-index: 1;
+  pointer-events: none;
+  background: linear-gradient(to right, transparent, rgba(139, 92, 246, 0.45), rgba(34, 211, 238, 0.35), transparent);
+}
+#podcast.zts-bg-paused .zts-bg-mesh,
+#podcast.zts-bg-paused .zts-bg-grid {
+  animation-play-state: paused;
+}
+
+#podcast .zts-badge {
+  position: absolute;
+  top: 1rem;
+  left: 1rem;
+  z-index: 4;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  padding: 0.38rem 0.75rem 0.38rem 0.6rem;
+  border-radius: 999px;
+  font-size: 0.65rem;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: #ecfeff;
+  background: linear-gradient(135deg, rgba(124, 58, 237, 0.92), rgba(6, 182, 212, 0.88));
+  box-shadow: 0 0 16px rgba(139, 92, 246, 0.65), 0 0 24px rgba(34, 211, 238, 0.32);
+  animation: zts-badge-pulse 2.4s ease-in-out infinite;
+  pointer-events: none;
+}
+#podcast .zts-badge::before {
+  content: "";
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: #fff;
+  box-shadow: 0 0 8px #fff;
+}
+#podcast .zts-badge.zts-badge--calm {
+  animation: none;
+  background: linear-gradient(135deg, rgba(124, 58, 237, 0.75), rgba(6, 182, 212, 0.55));
+  box-shadow: 0 0 10px rgba(139, 92, 246, 0.35);
+}
+@keyframes zts-badge-pulse {
+  0%, 100% { box-shadow: 0 0 12px rgba(139, 92, 246, 0.5), 0 0 18px rgba(34, 211, 238, 0.25); }
+  50% { box-shadow: 0 0 22px rgba(139, 92, 246, 0.9), 0 0 36px rgba(34, 211, 238, 0.5); }
+}
+
+#podcast .zts-reveal {
+  opacity: 0;
+  transform: translate3d(0, 22px, 0);
+  transition: opacity 700ms ease, transform 700ms ease;
+}
+#podcast .zts-reveal.is-in {
+  opacity: 1;
+  transform: none;
+}
+#podcast .zts-reveal.is-in::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 0;
+  height: 28%;
+  pointer-events: none;
+  z-index: 4;
+  background: linear-gradient(180deg, transparent 0%, rgba(165, 243, 252, 0.22) 50%, transparent 100%);
+  animation: zts-scan-sweep 0.7s ease-out both;
+  border-radius: inherit;
+}
+#podcast .zts-header.zts-reveal.is-in::after { display: none; }
+@keyframes zts-scan-sweep {
+  from { transform: translate3d(0, -120%, 0); opacity: 0.85; }
+  to { transform: translate3d(0, 280%, 0); opacity: 0; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  #podcast .zts-bg-mesh,
+  #podcast .zts-bg-grid,
+  #podcast .zts-badge,
+  #podcast .zts-reveal,
+  #podcast .zts-reveal.is-in,
+  #podcast .zts-reveal.is-in::after,
+  #podcast .zts-play-circle,
+  #podcast .zts-play-btn:hover .zts-play-circle {
+    animation: none !important;
+    transition: none !important;
+    transform: none !important;
+    filter: none !important;
+  }
+  #podcast .zts-reveal,
+  #podcast .zts-reveal.is-in { opacity: 1; }
+  #podcast .zts-reveal.is-in::after { content: none; display: none; }
+  #podcast .zts-bg-canvas { display: none; }
+}
+
+@media (max-width: 639px) {
+  #podcast .zts-bg-mesh {
+    /* lighter blur cost on phones: smaller painted area is already inset */
+    animation-duration: 40s;
+  }
+  #podcast .zts-episode {
+    backdrop-filter: blur(12px) saturate(130%);
+    -webkit-backdrop-filter: blur(12px) saturate(130%);
+  }
 }
