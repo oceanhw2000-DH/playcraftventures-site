@@ -347,7 +347,8 @@ footer a[aria-label] {
 #podcast .zts-badge {
   position: absolute;
   top: 1rem;
-  left: 1rem;
+  right: 1rem;
+  left: auto;
   z-index: 4;
   display: inline-flex;
   align-items: center;
