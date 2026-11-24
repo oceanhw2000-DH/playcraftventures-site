@@ -220,13 +220,17 @@
 
 #podcast .zts-guest {
   margin: 28px 0 0;
+  padding: 0 0.25rem;
   font-size: 0.9375rem;
-  line-height: 1.5;
+  line-height: 1.6;
   color: #9ca3af;
+  overflow-wrap: break-word;
 }
 #podcast .zts-guest a {
+  display: inline-block;
   color: #a78bfa;
   text-decoration: none;
+  overflow-wrap: anywhere;
 }
 #podcast .zts-guest a:hover { color: #c4b5fd; text-decoration: underline; }
 
