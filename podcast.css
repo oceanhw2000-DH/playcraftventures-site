@@ -441,3 +441,8 @@ footer a[aria-label] {
     -webkit-backdrop-filter: blur(12px) saturate(130%);
   }
 }
+
+/* Sticky-nav offset for in-page section links (Vision, News, Podcast, Contact) */
+#vision, #news, #podcast, #contact {
+  scroll-margin-top: 6rem;
+}
